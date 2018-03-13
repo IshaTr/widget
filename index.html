@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="./static/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600" rel="stylesheet">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>My Shop</title>
+</head>
+<body>
+  <h3>My Shop</h3>
+  <div class="product-container" />
+
+  <script>
+    axios.get('https://gist.githubusercontent.com/IshaTr/07ab7c8eea8735c0b020d920143a1b47/raw/60ef9a67b1e0e5524a7acad8486a51bbfff34cb3/e-commerce-product')
+        .then(response => {
+            const productElement = document.querySelector(".product-container");
+            response.data.map(prod => {
+                const product = document.createElement("div");
+                product.innerHTML = `
+                    <div class="product">
+                        <img src="${prod.product_image}"/>
+                        <p class="brand">${prod.product_brand}</p>
+                        <p>${prod.product_name}</p>
+                        <p class="price-${prod.id}">
+                            $ ${prod.product_price}
+                        </p>
+                    </div>
+                    `
+                productElement.appendChild(product);
+            });
+    });
+  </script>
+  <script src="./static/index.js"></script>
+</body>
+</html>
